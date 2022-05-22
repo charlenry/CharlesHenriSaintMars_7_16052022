@@ -1,0 +1,14 @@
+// Mixins des Google fonts
+@include google-fonts('Lato');
+@include google-fonts('DM Sans');
+@include google-fonts('Roboto');
+
+html {
+  font-size: 62.5%;  // <=> 1rem = 10px
+  font-family: Lato, sans-serif;
+}
+
+// Démonstration :
+// Par convention, 16px => 100%
+//          donc : 10px => 62.5%  <=> 1rem 
+
