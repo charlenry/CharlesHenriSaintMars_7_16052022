@@ -1,0 +1,20 @@
+// Mise en page mobile first
+/* Largeur d'écran >= 1440px */
+@media screen and (min-width : $desktop) {  // 1440px
+  body {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+  .recipes_wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 32px;
+  }
+  
+  .recipes_wrapper article {
+    min-width: 260px;
+    height: 364px;
+    border-radius: 5px;
+  }
+  
+}

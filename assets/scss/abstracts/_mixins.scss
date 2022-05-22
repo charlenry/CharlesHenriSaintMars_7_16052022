@@ -1,0 +1,16 @@
+// Mixins qui permet d'inclure de nouvelles polices
+@mixin google-fonts($font) {
+  @if ($font == 'Lato') {
+    @import url('https://fonts.googleapis.com/css2?family=#{$font}:wght@300;400;700;900&display=swap');
+  }
+
+  @if($font == 'DM Sans') {
+    $font: 'DM+Sans';
+    @import url('https://fonts.googleapis.com/css2?family=#{$font}:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+  }
+
+  @if ($font == 'Roboto') {
+    @import url('https://fonts.googleapis.com/css2?family=#{$font}:wght@100;400;500;700;900&display=swap');
+  }
+}
+

@@ -1,0 +1,55 @@
+/**
+ * Nom du fichier : assets\css\style.css
+ * Fonction : Stylise la page d'accueil
+ * Auteur(s) : Charles-Henri Saint-Mars
+**/
+
+// Mixins des Google fonts
+@include google-fonts('Lato');
+@include google-fonts('DM Sans');
+@include google-fonts('Roboto');
+
+// Initialisation
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 1px solid red;
+}
+
+html {
+  font-size: 62.5%;  // <=> 1rem = 10px
+  font-family: Lato, sans-serif;
+}
+
+// Démonstration :
+// Par convention, 16px => 100%
+//          donc : 10px => 62.5%  <=> 1rem 
+
+
+body {
+  padding-top: 4.2rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo {
+  width: 5.048rem;
+  height: 4.629rem;
+}
+
+h1 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 3.6rem;
+  color: #D04F4F;
+}
+

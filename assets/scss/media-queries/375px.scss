@@ -1,0 +1,9 @@
+// Mise en page mobile first
+/* Largeur d'écran >= 375px */
+@media screen and (min-width : $iphone-6-7-8) {  // 375px ; correspond à iphone-x
+  body {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+}
