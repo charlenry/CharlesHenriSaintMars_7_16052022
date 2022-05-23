@@ -1,0 +1,15 @@
+// Gestion de l'animation des cartes
+.hover-shadow {
+  -webkit-transition-duration: 0.7s;
+  -o-transition-duration: 0.7s;
+  transition-duration: 0.7s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+}
+
+// Gestion du curseur au survol des cartes
+.cursor {
+  cursor: pointer;
+}

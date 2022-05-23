@@ -56,13 +56,13 @@ class RecipeDataModel {
         quantity = ingredient.quantity;
       }
 
-      ingredients += `${ingrediente} ${quantity} ${unit} <br>`;
+      ingredients += `<b>${ingrediente}</b> ${quantity} ${unit} <br>`;
     }
     return ingredients;
   }
 
-  get time() {
-    return this._time;
+  get time() {    
+    return `${this._time} min`;
   }
   
   get description() {

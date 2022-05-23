@@ -12,15 +12,13 @@
   }
 
   .recipes_wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    row-gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+    row-gap: 3.2rem;
   }
   
   .recipes_wrapper article {
-    min-width: 260px;
-    height: 364px;
-    border-radius: 5px;
+    min-width: 26rem;
+    height: 36.4rem;
   }
   
 }
