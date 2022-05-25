@@ -7,14 +7,25 @@
     padding-right: 1rem;
   }
 
-  .recipes_wrapper {
+  .recipes-wrapper {
     grid-template-columns: 1fr;
     gap: 3.2rem 5rem;
   }
   
-  .recipes_wrapper article {
+  .recipes-wrapper article {
     min-width: 38rem;
     height: 36.4rem;
+  }
+
+  .recipe-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+  }
+
+  .recipe-ingredients {
+    font-size: 1.3rem;
+    line-height: 1.5rem;
   }
   
 }

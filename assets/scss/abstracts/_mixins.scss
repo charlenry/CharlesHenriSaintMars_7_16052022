@@ -14,10 +14,11 @@
   }
 }
 
-@mixin multiline-ellipsis {
+@mixin multiline-ellipsis($lineNb) {
+  //$lineNb : numéro de ligne où apparait les 3 points. La 1ère ligne commence à 1
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: $lineNb;
   overflow: hidden;
   text-overflow: ellipsis;
 }

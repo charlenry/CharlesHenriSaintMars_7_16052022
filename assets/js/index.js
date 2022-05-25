@@ -10,12 +10,16 @@
 
 class Main {
   constructor() {
-    this.$recipesWrapper = document.querySelector(".recipes_wrapper");
+    this.$recipesWrapper = document.querySelector(".recipes-wrapper");
   }
 
   async init() {
     /* Création d'un tableau contenant la mise en forme des données des recettes */
     const recipesDataModel = recipes.map(data => new RecipeDataModel(data));
+
+    /* Ajout de la barre de recherche par titre, ingrédients et description */
+    const searchByNameIngredientsDescription = new SearchBar(recipesDataModel);
+    searchByNameIngredientsDescription.render();
 
     /* Pour chaque recette */
     recipesDataModel.forEach(recipe => {

@@ -11,14 +11,25 @@
     font-size: 2.8rem;
   }
 
-  .recipes_wrapper {
+  .recipes-wrapper {
     grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
     row-gap: 3.2rem;
   }
   
-  .recipes_wrapper article {
+  .recipes-wrapper article {
     min-width: 26rem;
     height: 36.4rem;
+  }
+
+  .recipe-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+  }
+
+  .recipe-ingredients {
+    font-size: 1rem;
+    line-height: 1.2rem;
   }
   
 }

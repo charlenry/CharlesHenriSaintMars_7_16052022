@@ -22,17 +22,21 @@ class RecipeDataModel {
     this._ustensils = recipe.ustensils;
   }
 
+
   get id() {
     return this._id;
   }
+
 
   get name() {
     return this._name;
   }
 
+
   get serving() {
     return this._serving;
   }
+
 
   get ingredientsForOneRecipe() {
     let ingredients = "";
@@ -61,17 +65,49 @@ class RecipeDataModel {
     return ingredients;
   }
 
+
+  get ingredientsForSearch() {
+    let ingredients = "";
+    let quantity ="";
+    let unit = "";
+    let ingrediente = "";
+    let colon = ':';
+
+    for (let ingredient of this._ingredients) {
+      if(ingredient.unit === undefined) {
+        unit = "";
+      } else {
+        unit = ingredient.unit;
+      }
+
+      if(ingredient.quantity === undefined) {
+        quantity = "";
+        ingrediente = ingredient.ingredient;
+      } else {
+        ingrediente = ingredient.ingredient + colon;
+        quantity = ingredient.quantity;
+      }
+
+      ingredients += `${ingrediente} ${quantity} ${unit}, `;
+    }
+    return ingredients;
+  }
+
+  
   get time() {    
     return `${this._time} min`;
   }
   
+
   get description() {
     return this._description;
   }
   
+
   get appliance() {
     return this._appliance;
   }
+
 
   get ustensils() {
     return this._ustensils;

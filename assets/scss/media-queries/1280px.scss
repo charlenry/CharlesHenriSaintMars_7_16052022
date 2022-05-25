@@ -1,20 +1,31 @@
 // Mise en page mobile first
 
 /* Largeur d'écran >= 1280px */
-@media screen and (min-width : $laptop) {  // 1280px
+@media screen and (min-width : $laptop) {  // 1280px ; correspond à nest-hub-max
   body {
     padding-left: 2rem;
     padding-right: 2rem;
   }
 
-  .recipes_wrapper {
+  .recipes-wrapper {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 3.2rem;
   }
   
-  .recipes_wrapper article {
+  .recipes-wrapper article {
     min-width: 26rem;
     height: 36.4rem;
+  }
+
+  .recipe-name {
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.6rem;
+  }
+
+  .recipe-ingredients {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
   }
   
 }
