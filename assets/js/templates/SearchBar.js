@@ -5,6 +5,10 @@
 **/
 
 class SearchBar {
+  /**
+   * @param {object} recipes
+  **/
+  
   constructor(recipes) {
     this._recipes = recipes;
     this.searchByNameIngredientsDescription = new SearchByNameIngredientsDescription(this._recipes);

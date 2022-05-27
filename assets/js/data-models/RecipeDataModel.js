@@ -16,6 +16,7 @@ class RecipeDataModel {
     this._name = recipe.name;
     this._serving = recipe.serving;
     this._ingredients = recipe.ingredients;
+    this._ingredientsForSearch = "";
     this._time = recipe.time;
     this._description = recipe.description;
     this._appliance = recipe.appliance;
@@ -39,7 +40,7 @@ class RecipeDataModel {
 
 
   get ingredientsForOneRecipe() {
-    let ingredients = "";
+    let ingredientsForRender = "";
     let quantity ="";
     let unit = "";
     let ingrediente = "";
@@ -60,37 +61,15 @@ class RecipeDataModel {
         quantity = ingredient.quantity;
       }
 
-      ingredients += `<b>${ingrediente}</b> ${quantity} ${unit} <br>`;
+      this._ingredientsForSearch += `${ingrediente} ${quantity} ${unit}, `;
+      ingredientsForRender += `<b>${ingrediente}</b> ${quantity} ${unit} <br>`;
     }
-    return ingredients;
+    return ingredientsForRender;
   }
 
 
   get ingredientsForSearch() {
-    let ingredients = "";
-    let quantity ="";
-    let unit = "";
-    let ingrediente = "";
-    let colon = ':';
-
-    for (let ingredient of this._ingredients) {
-      if(ingredient.unit === undefined) {
-        unit = "";
-      } else {
-        unit = ingredient.unit;
-      }
-
-      if(ingredient.quantity === undefined) {
-        quantity = "";
-        ingrediente = ingredient.ingredient;
-      } else {
-        ingrediente = ingredient.ingredient + colon;
-        quantity = ingredient.quantity;
-      }
-
-      ingredients += `${ingrediente} ${quantity} ${unit}, `;
-    }
-    return ingredients;
+    return this._ingredientsForSearch;
   }
 
   

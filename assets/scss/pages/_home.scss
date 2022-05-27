@@ -131,3 +131,104 @@ h1 {
   background-repeat: no-repeat;
 }
 
+
+
+// ******* Gestion des boutons de filtre *******
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+  font-family: Lato, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.16rem;
+  border: none;
+  cursor: pointer;
+  height: 6.9rem;
+  width: 17rem;
+  border-radius: 0.5rem;
+}
+
+.dropbtn {
+  background-color: #3282F7;
+}
+
+.dropbtn2 {
+  background-color: #68D9A4;
+}
+
+.dropbtn3 {
+  background-color: #ED6454;
+}
+
+#myInput {
+  background-position: 85% 8px;
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  font-size: 17px;
+  padding: 10px 95px 10px 5px;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+#myInput:focus {
+  outline: 3px solid #ddd;
+}
+
+.dropdown-content {
+  height : 200px;
+  width: 400px;
+  display: none;
+  position: relative;
+  background-color: #f6f6f6;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.li-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-flow: column;
+  margin-top: 7px;
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.dropdown-wrapper {
+  display: flex;
+  column-gap: 20px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.fa-angle-up {
+  position: absolute;
+  left: 94%;
+  top: 12px;
+}
+
+.container {
+   margin-left: 0;
+}
+
+.show {
+  display: block;
+}
+
+// ******* Fin de gestion des boutons de filtre ********
+

@@ -21,6 +21,10 @@ class Main {
     const searchByNameIngredientsDescription = new SearchBar(recipesDataModel);
     searchByNameIngredientsDescription.render();
 
+    /* Ajout des filtres */
+    const filters = new Filters(recipesDataModel);
+    filters.render();
+
     /* Pour chaque recette */
     recipesDataModel.forEach(recipe => {
       /* Créer un objet template */

@@ -33,7 +33,7 @@ class SearchByNameIngredientsDescription extends Search {
       recipe.description.toLowerCase().includes(query.toLowerCase())
     );
 
-    let intermedResult = resultsByName.concat(resultsByDescription);
+    let intermedResult = resultsByName.concat(resultsByIngredients, resultsByDescription);
     let finalResult = [...new Set(intermedResult)];
     return finalResult;
   }
