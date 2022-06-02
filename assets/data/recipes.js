@@ -392,7 +392,7 @@ const recipes = [
               "unit": "tranches"
           }, 
           {
-              "ingredient": "Pommes",
+              "ingredient": "Pomme",
               "quantity": 1
           },
           {
@@ -421,7 +421,7 @@ const recipes = [
               "unit": "grammes"
           },
           {
-              "ingredient": "Pommes",
+              "ingredient": "Pomme",
               "quantity": 8
           },
           {
@@ -1673,11 +1673,11 @@ const recipes = [
       "servings": 4,
       "ingredients": [
           {
-              "ingredient": "Bananes",
+              "ingredient": "Banane",
               "quantity": 2
           },
           {
-              "ingredient": "Kiwis",
+              "ingredient": "Kiwi",
               "quantity": 3
           },
           {
