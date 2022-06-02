@@ -25,6 +25,7 @@ class RecipeDataModel {
 
 
   get id() {
+    /* Retourne un nombre */
     return this._id;
   }
 
@@ -35,6 +36,7 @@ class RecipeDataModel {
 
 
   get serving() {
+    /* Retourne un nombre */
     return this._serving;
   }
 
@@ -61,19 +63,24 @@ class RecipeDataModel {
         quantity = ingredient.quantity;
       }
 
+      /* Liste des ingrédients sous forme de chaine non balisée destinée à la recherche */
       this._ingredientsForSearch += `${ingrediente} ${quantity} ${unit}, `;
+      /* Liste des ingrédients sous forme de chaine balisée */
       ingredientsForRender += `<b>${ingrediente}</b> ${quantity} ${unit} <br>`;
     }
+
+    /* Retourne la liste des ingrédients sous forme de chaine balisée pour affichage */
     return ingredientsForRender;
   }
 
 
   get ingredientsForSearch() {
+    /* Retourne la liste des ingrédients sous forme de chaine non balisée destinée à la recherche */
     return this._ingredientsForSearch;
   }
 
   
-  get time() {    
+  get time() {
     return `${this._time} min`;
   }
   
@@ -84,11 +91,13 @@ class RecipeDataModel {
   
 
   get appliance() {
+    /* Retourne une chaine */
     return this._appliance;
   }
 
 
   get ustensils() {
+    /* retourne un tableau des ustensiles */
     return this._ustensils;
   }
 

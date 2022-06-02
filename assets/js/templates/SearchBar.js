@@ -30,6 +30,7 @@ class SearchBar {
 
 
   onSearch() {
+    const that = this
     let recipesFound = null;
 
     this.$wrapper
@@ -39,11 +40,11 @@ class SearchBar {
 
         if (query.length >= 3) {
           recipesFound = this.searchByNameIngredientsDescription.search(query);
-          this.displayRecipes(recipesFound);
+          that.displayRecipes(recipesFound);
         } else if (query.length < 3) {
-          this.displayRecipes(this._recipes);
+          that.displayRecipes(that._recipes);
         }
-    })
+    });
   }
 
 
