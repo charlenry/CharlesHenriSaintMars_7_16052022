@@ -169,6 +169,7 @@ class Filters {
         recipesFound = that.searchByAppliance.search(target);
         that.displayRecipes(recipesFound);
       });
+      
 
       this.$wrapper
       .querySelector('.li-ustensiles')
