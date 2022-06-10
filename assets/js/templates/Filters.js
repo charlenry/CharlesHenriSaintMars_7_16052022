@@ -178,10 +178,12 @@ class Filters {
     
     if (g_query.length >= 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
       this._searchByNID.handleQueryBar(g_query);
+
     } else if (g_query.length < 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
       this.displayRecipes(this._recipes);
       this.resourcesFromKeywords.recipes = this._recipes;
       this.displayMenusLists(this.resourcesFromKeywords);
+
     } else if (g_query.length >= 3 && g_tags.length >= 1) {  /* après  avoir supprimé le tag **/
       recipesFound = this._searchByNID.searchByNIDFromInitialData.search(g_query);
       
@@ -201,6 +203,7 @@ class Filters {
       this.displayRecipes(recipesFound);
       this.resourcesFromKeywords.recipes = recipesFound;
       this.displayMenusLists(this.resourcesFromKeywords);
+
     } else if (g_query.length < 3 && g_tags.length >= 1) {    /* après  avoir supprimé le tag **/
       recipesFound = this._recipes;
 
@@ -223,11 +226,14 @@ class Filters {
     }
 
     g_previousSearchResult = recipesFound;
+    this.removeSelectedIngedientFomList();
+    this.removeSelectedApplianceFomList();
+    this.removeSelectedUstensilFomList();
      
     /* console */
-    // console.log('g_previousSearchResult:', g_previousSearchResult);
-    // console.log('g_query:', g_query);
-    // console.log('g_tags:', g_tags);
+    console.log('g_previousSearchResult:', g_previousSearchResult);
+    console.log('g_query:', g_query);
+    console.log('g_tags:', g_tags);
 
   }
 
