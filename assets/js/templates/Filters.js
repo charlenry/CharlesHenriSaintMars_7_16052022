@@ -130,16 +130,16 @@ class Filters {
   
   
   handleAdvancedFilter(inputValue, liGridCl) {
-    let liArray, $liGrid, i, liValue;
+    let liArray, $liGrid, liValue;
 
     $liGrid = this.$wrapper.querySelector(liGridCl);
     liArray = $liGrid.getElementsByTagName("li");
-    for (i = 0; i < liArray.length; i++) {
-      liValue = liArray[i].textContent ;
+    for (let li of liArray) {
+      liValue = li.textContent;
       if (liValue.toLowerCase().indexOf(inputValue) > -1) {
-        liArray[i].style.display = "block";  /* Afficher l'élément */
+        li.style.display = "block";  /* Afficher l'élément */
       } else {
-        liArray[i].style.display = "none";  /* Ne plus afficher l'élément */
+        li.style.display = "none";  /* Ne plus afficher l'élément */
       }
     }
   }
