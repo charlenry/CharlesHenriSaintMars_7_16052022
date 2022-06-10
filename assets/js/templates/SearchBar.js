@@ -7,11 +7,19 @@
 class SearchBar {
   /**
    * @param {object} recipes
+   * @param {object} filters
   **/
   
-  constructor(recipes) {
+  constructor(recipes, filters) {
     this._recipes = recipes;
-    this.searchByNameIngredientsDescription = new SearchByNameIngredientsDescription(this._recipes);
+    this._filters = filters;
+    this._filters.searchByNID = this;  /* Permet à l'objet filters d'accéder aux methodes de l'objet courant */
+    
+    this.searchByNIDFromInitialData = new SearchByNameIngredientsDescription(this._recipes);
+    this.searchByNIDFromKeywords = new SearchByNameIngredientsDescription(this._recipes);
+    
+    this.resourcesFromInitialData = new RecourcesDataModel(this._recipes);
+    this.resourcesFromKeywords = new RecourcesDataModel(this._recipes);
 
     this.$wrapper = document.createElement('div');
     this.$searchWrapper = document.querySelector('.search-wrapper');
@@ -22,28 +30,73 @@ class SearchBar {
   displayRecipes(recipes) {
     this.$recipesWrapper.innerHTML = "";
 
-    recipes.forEach(recipe => {
-        const templateCard = new RecipeCard(recipe);
-        this.$recipesWrapper.appendChild(templateCard.createRecipeCard());
-    });
+    if (recipes.length == 0) {
+      this.$recipesWrapper.innerHTML = `<span class="errorMessage">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>`;
+    } else {
+      recipes.forEach(recipe => {
+          const templateCard = new RecipeCard(recipe);
+          this.$recipesWrapper.appendChild(templateCard.createRecipeCard());
+      });
+    }
+
+  }
+
+
+  handleQueryBar(query) {
+    let recipesFound = null;
+    
+    if (query.length >= 3 && g_tags.length == 0) {
+      recipesFound = this.searchByNIDFromInitialData.search(query);
+      g_previousSearchResult = recipesFound;
+      this.displayRecipes(recipesFound);
+      this.resourcesFromKeywords.recipes = recipesFound;
+      this._filters.displayMenusLists(this.resourcesFromKeywords);
+    } else if (query.length < 3 && g_tags.length == 0) {
+      g_previousSearchResult = this._recipes;
+      this.displayRecipes(this._recipes);
+      this.resourcesFromKeywords.recipes = this._recipes;
+      this._filters.displayMenusLists(this.resourcesFromKeywords);
+    } else if (query.length >= 3 && g_tags.length >= 1) {
+      recipesFound = this.searchByNIDFromInitialData.search(query);
+    
+      for (let tag of g_tags) {
+        this.searchByNIDFromKeywords.recipes = recipesFound;
+        recipesFound = this.searchByNIDFromKeywords.search(tag);
+      }
+      g_previousSearchResult = recipesFound;
+      this.displayRecipes(recipesFound);
+      this.resourcesFromKeywords.recipes = recipesFound;
+      this._filters.displayMenusLists(this.resourcesFromKeywords);
+    } else if (query.length < 3 && g_tags.length >= 1) {
+      recipesFound = this._recipes;
+      for (let tag of g_tags) {
+        this.searchByNIDFromKeywords.recipes = recipesFound;
+        recipesFound = this.searchByNIDFromKeywords.search(tag);
+      }
+      g_previousSearchResult = recipesFound;
+      this.displayRecipes(recipesFound);
+      this.resourcesFromKeywords.recipes = recipesFound;
+      this._filters.displayMenusLists(this.resourcesFromKeywords);
+    }
+
+    /* console */
+    console.log('g_previousSearchResult:', g_previousSearchResult);
+    console.log('g_query:', g_query);
+    console.log('g_tags:', g_tags);
+
   }
 
 
   onSearch() {
-    const that = this
-    let recipesFound = null;
+    const that = this;
 
     this.$wrapper
       .querySelector('.search-input')
       .addEventListener('keyup', e => {
         const query = e.target.value;
+        g_query = query;
 
-        if (query.length >= 3) {
-          recipesFound = this.searchByNameIngredientsDescription.search(query);
-          that.displayRecipes(recipesFound);
-        } else if (query.length < 3) {
-          that.displayRecipes(that._recipes);
-        }
+        that.handleQueryBar(query);
     });
   }
 

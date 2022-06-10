@@ -20,6 +20,10 @@ class SearchByNameIngredientsDescription extends Search {
     super(recipes);
   }
 
+  set recipes(recipes) {
+    this._recipes = recipes;
+  }
+
   selectRecipes(query) {
     /* Sélectionner les recettes en fonction leur nom */
     let resultsByName = this._recipes.filter(recipe =>
@@ -50,6 +54,10 @@ class SearchByIngredient extends Search {
     super(recipes);
   }
 
+  set recipes(recipes) {
+    this._recipes = recipes;
+  }
+
   selectRecipes(query) {
     /* Sélectionner les recettes en fonction d'un ingrédient */
     let resultsByIngredient = this._recipes.filter(recipe =>
@@ -64,6 +72,10 @@ class SearchByIngredient extends Search {
 class SearchByAppliance extends Search {
   constructor(recipes) {
     super(recipes);
+  }
+
+  set recipes(recipes) {
+    this._recipes = recipes;
   }
 
   selectRecipes(query) {
@@ -81,6 +93,10 @@ class SearchByAppliance extends Search {
 class SearchByUstensil extends Search {
   constructor(recipes) {
     super(recipes);
+  }
+
+  set recipes(recipes) {
+    this._recipes = recipes;
   }
 
   selectRecipes(query) {

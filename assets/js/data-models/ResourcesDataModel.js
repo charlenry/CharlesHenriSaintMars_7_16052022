@@ -17,6 +17,11 @@ class RecourcesDataModel {
   }
 
 
+  set recipes(recipes) {
+    this._recipes = recipes;
+  }
+
+
   /* mettre en majuscule la première lettre d'une chaine */
   upperCaseFirstChar(str){
     return (str+'').charAt(0).toUpperCase()+str.substr(1);

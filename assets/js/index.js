@@ -7,6 +7,10 @@
 "use strict";
 //import { recipes } from "../data/recipes.js";
 
+/* Variables globales */
+let g_previousSearchResult = [];
+let g_query ="";
+let g_tags = [];
 
 class Main {
   constructor() {
@@ -17,13 +21,18 @@ class Main {
     /* Création d'un tableau contenant la mise en forme des données des recettes */
     const recipesDataModel = recipes.map(data => new RecipeDataModel(data));
 
+    /* Ajout de la gestion des tags */
+    const tags = new Tag();
+
+     /* Ajout des filtres */
+     const filters = new Filters(recipesDataModel, tags);
+     filters.render();
+
     /* Ajout de la barre de recherche par titre, ingrédients et description */
-    const searchByNameIngredientsDescription = new SearchBar(recipesDataModel);
+    const searchByNameIngredientsDescription = new SearchBar(recipesDataModel, filters);
     searchByNameIngredientsDescription.render();
 
-    /* Ajout des filtres */
-    const filters = new Filters(recipesDataModel);
-    filters.render();
+   
 
     /* Pour chaque recette */
     recipesDataModel.forEach(recipe => {

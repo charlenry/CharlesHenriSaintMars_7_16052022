@@ -7,11 +7,17 @@
 class Filters {
   /**
    * @param {object} recipes
+   * @param {object} tags
   **/
   
-  constructor(recipes) {
+  constructor(recipes, tags) {
     this._recipes = recipes;
-    this.resources = new RecourcesDataModel(this._recipes);
+    this._tags = tags;
+    this._tags.filters = this;  /* Permet à l'objet tag d'accéder aux methodes de l'objet courant */
+    this._searchByNID = null;
+    this.resourcesFromInitialData = new RecourcesDataModel(this._recipes);
+    this.resourcesFromKeywords = new RecourcesDataModel(this._recipes);
+    
     this.searchByIngredient = new SearchByIngredient(this._recipes);
     this.searchByAppliance = new SearchByAppliance(this._recipes);
     this.searchByUstensil = new SearchByUstensil(this._recipes);
@@ -20,6 +26,10 @@ class Filters {
     this.$tagsWrapper = document.querySelector('.tags-wrapper');
     this.$filtersWrapper = document.querySelector('.filters-wrapper');
     this.$recipesWrapper = document.querySelector(".recipes-wrapper");
+  }
+
+  set searchByNID(searchBar) {
+    this._searchByNID = searchBar;
   }
 
 
@@ -77,7 +87,7 @@ class Filters {
   }
 
 
-  onKeyUpFilter() {
+  onKeyUpAdvancedFilter() {
     const that = this;
 
     this.$wrapper
@@ -85,7 +95,7 @@ class Filters {
       .addEventListener('keyup', e => {
         const query = e.target.value.toLowerCase();
 
-        that.handleFilter(query, '.li-ingredients');
+        that.handleAdvancedFilter(query, '.li-ingredients');
     });
 
     this.$wrapper
@@ -93,7 +103,7 @@ class Filters {
       .addEventListener('keyup', e => {
         const query = e.target.value.toLowerCase();
 
-        that.handleFilter(query, '.li-appareils');
+        that.handleAdvancedFilter(query, '.li-appareils');
     });
 
     this.$wrapper
@@ -101,7 +111,7 @@ class Filters {
       .addEventListener('keyup', e => {
         const query = e.target.value.toLowerCase();
 
-        that.handleFilter(query, '.li-ustensiles');
+        that.handleAdvancedFilter(query, '.li-ustensiles');
     });
 
   }
@@ -119,7 +129,7 @@ class Filters {
   }
   
   
-  handleFilter(inputValue, liGridCl) {
+  handleAdvancedFilter(inputValue, liGridCl) {
     let liArray, $liGrid, i, liValue;
 
     $liGrid = this.$wrapper.querySelector(liGridCl);
@@ -135,6 +145,22 @@ class Filters {
   }
 
 
+  displayMenusLists(resources = this.resourcesFromInitialData) {
+    const $liIngredients = this.$wrapper.querySelector('.li-ingredients');
+    const $liAppareils = this.$wrapper.querySelector('.li-appareils');
+    const $liUstensiles = this.$wrapper.querySelector('.li-ustensiles');
+
+    $liIngredients.innerHTML = "";
+    $liIngredients.innerHTML = resources.ingredientsAsList;
+
+    $liAppareils.innerHTML = "";
+    $liAppareils.innerHTML = resources.appliancesAsList;
+
+    $liUstensiles.innerHTML = "";
+    $liUstensiles.innerHTML = resources.ustensilsAsList;
+  }
+
+
   displayRecipes(recipes) {
     this.$recipesWrapper.innerHTML = "";
 
@@ -145,40 +171,273 @@ class Filters {
   }
 
 
-  onClickMenu() {
-    const that = this;
+
+  handleClickOnTagCloseBtn() {
     let recipesFound = null;
+    let liArray = null;
+    
+    if (g_query.length >= 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
+      this._searchByNID.handleQueryBar(g_query);
+    } else if (g_query.length < 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
+      this.displayRecipes(this._recipes);
+      this.resourcesFromKeywords.recipes = this._recipes;
+      this.displayMenusLists(this.resourcesFromKeywords);
+    } else if (g_query.length >= 3 && g_tags.length >= 1) {  /* après  avoir supprimé le tag **/
+      recipesFound = this._searchByNID.searchByNIDFromInitialData.search(g_query);
+      
+      liArray = this.$tagsWrapper.getElementsByTagName("li");
+      for (let li of liArray) {
+        if (li.className === 'ingredient') {
+          this.searchByIngredient.recipes = recipesFound;
+          recipesFound = this.searchByIngredient.search(li.textContent);
+        } else if (li.className === 'appliance') {
+          this.searchByAppliance.recipes = recipesFound;
+          recipesFound = this.searchByAppliance.search(li.textContent);
+        } else if (li.className === 'ustensil') {
+          this.searchByUstensil.recipes = recipesFound;
+          recipesFound = this.searchByUstensil.search(li.textContent);
+        }
+      }
+      this.displayRecipes(recipesFound);
+      this.resourcesFromKeywords.recipes = recipesFound;
+      this.displayMenusLists(this.resourcesFromKeywords);
+    } else if (g_query.length < 3 && g_tags.length >= 1) {    /* après  avoir supprimé le tag **/
+      recipesFound = this._recipes;
+
+      liArray = this.$tagsWrapper.getElementsByTagName("li");
+      for (let li of liArray) {
+        if (li.className === 'ingredient') {
+          this.searchByIngredient.recipes = recipesFound;
+          recipesFound = this.searchByIngredient.search(li.textContent);
+        } else if (li.className === 'appliance') {
+          this.searchByAppliance.recipes = recipesFound;
+          recipesFound = this.searchByAppliance.search(li.textContent);
+        } else if (li.className === 'ustensil') {
+          this.searchByUstensil.recipes = recipesFound;
+          recipesFound = this.searchByUstensil.search(li.textContent);
+        }
+      }
+      this.displayRecipes(recipesFound);
+      this.resourcesFromKeywords.recipes = recipesFound;
+      this.displayMenusLists(this.resourcesFromKeywords);
+    }
+
+    g_previousSearchResult = recipesFound;
+     
+    /* console */
+    // console.log('g_previousSearchResult:', g_previousSearchResult);
+    // console.log('g_query:', g_query);
+    // console.log('g_tags:', g_tags);
+
+  }
+
+
+  removeSelectedIngedientFomList() {
+    let liArray = null;
+
+    liArray = this.$wrapper.querySelector('.li-ingredients').getElementsByTagName("li");
+    for (let tag of g_tags) {
+      for (let li of liArray) {
+        if(li.textContent === tag) {
+          li.remove();
+        }
+      }
+    }
+  }
+
+
+  removeSelectedApplianceFomList() {
+    let liArray = null;
+
+    liArray = this.$wrapper.querySelector('.li-appareils').getElementsByTagName("li");
+    for (let tag of g_tags) {
+      for (let li of liArray) {
+        if(li.textContent === tag) {
+          li.remove();
+        }
+      }
+    }
+  }
+
+
+  removeSelectedUstensilFomList() {
+    let liArray = null;
+
+    liArray = this.$wrapper.querySelector('.li-ustensiles').getElementsByTagName("li");
+    for (let tag of g_tags) {
+      for (let li of liArray) {
+        if(li.textContent === tag) {
+          li.remove();
+        }
+      }
+    }
+  }
+
+
+
+  handleClickOnKeywords(keywords, tagType) {
+    let recipesFound = null;
+    
+    if (tagType === 'ingredient') {
+      if (g_query.length >= 3 && g_tags.length == 0) {
+        this.searchByIngredient.recipes = g_previousSearchResult;
+        recipesFound = this.searchByIngredient.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'ingredient');
+
+      } else if (g_query.length < 3 && g_tags.length == 0) {
+        this.searchByIngredient.recipes = this._recipes;
+        recipesFound = this.searchByIngredient.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'ingredient');
+
+      } else if (g_query.length >= 3 && g_tags.length >= 1) {
+        this.searchByIngredient.recipes = g_previousSearchResult;
+      
+        recipesFound = this.searchByIngredient.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'ingredient');
+
+      } else if (g_query.length < 3 && g_tags.length >= 1) {         
+        this.searchByIngredient.recipes = g_previousSearchResult;
+      
+        recipesFound = this.searchByIngredient.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'ingredient');
+      }
+    }
+
+
+    if (tagType === 'appliance') {
+      if (g_query.length >= 3 && g_tags.length == 0) {
+        this.searchByAppliance.recipes = g_previousSearchResult;
+        recipesFound = this.searchByAppliance.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'appliance');
+
+      } else if (g_query.length < 3 && g_tags.length == 0) {
+        this.searchByAppliance.recipes = this._recipes;
+        recipesFound = this.searchByAppliance.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'appliance');
+        
+      } else if (g_query.length >= 3 && g_tags.length >= 1) {
+        this.searchByAppliance.recipes = g_previousSearchResult;
+
+        recipesFound = this.searchByAppliance.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'appliance');
+
+      } else if (g_query.length < 3 && g_tags.length >= 1) {         
+        this.searchByAppliance.recipes = g_previousSearchResult;
+      
+        recipesFound = this.searchByAppliance.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'appliance');
+      }
+    }
+
+
+    if (tagType === 'ustensil') {
+      if (g_query.length >= 3 && g_tags.length == 0) {
+        this.searchByUstensil.recipes = g_previousSearchResult;
+
+        recipesFound = this.searchByUstensil.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this._tags.addTag(keywords, 'ustensil');
+
+      } else if (g_query.length < 3 && g_tags.length == 0) {
+        this.searchByUstensil.recipes = this._recipes;
+
+        recipesFound = this.searchByUstensil.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'ustensil');
+
+      } else if (g_query.length >= 3 && g_tags.length >= 1) {
+        this.searchByUstensil.recipes = g_previousSearchResult;
+      
+        recipesFound = this.searchByUstensil.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'ustensil');
+
+      } else if (g_query.length < 3 && g_tags.length >= 1) {         
+        this.searchByUstensil.recipes = g_previousSearchResult;
+      
+        recipesFound = this.searchByUstensil.search(keywords);
+        this.displayRecipes(recipesFound);
+        this.resourcesFromKeywords.recipes = recipesFound;
+        this.displayMenusLists(this.resourcesFromKeywords);
+        this._tags.addTag(keywords, 'ustensil');
+      }
+    }
+
+    g_tags.push(keywords);
+    g_previousSearchResult = recipesFound;
+    if (tagType === 'ingredient') {
+      this.removeSelectedIngedientFomList();
+    } else if (tagType === 'appliance') {
+      this.removeSelectedApplianceFomList();
+    } else if (tagType === 'ustensil') {
+      this.removeSelectedUstensilFomList();
+    }
+
+    /* console */
+    // console.log('g_previousSearchResult:', g_previousSearchResult);
+    // console.log('recipesFound:', recipesFound);
+    // console.log('g_query:', g_query);
+    // console.log('g_tags:', g_tags);
+
+  }
+
+
+  onClickMenuItem() {
+    const that = this;
 
     this.$wrapper
       .querySelector('.li-ingredients')
       .addEventListener('click', e => {
-        const target = e.target.innerText;
-        console.log(target);
+        const keywords = e.target.innerText;
 
-        recipesFound = that.searchByIngredient.search(target);
-        that.displayRecipes(recipesFound);
+        that.handleClickOnKeywords(keywords, 'ingredient')
       });
 
 
       this.$wrapper
       .querySelector('.li-appareils')
       .addEventListener('click', e => {
-        const target = e.target.innerText;
-        console.log(target);
+        const keywords = e.target.innerText;
 
-        recipesFound = that.searchByAppliance.search(target);
-        that.displayRecipes(recipesFound);
+        that.handleClickOnKeywords(keywords, 'appliance')
       });
-      
+
 
       this.$wrapper
       .querySelector('.li-ustensiles')
       .addEventListener('click', e => {
-        const target = e.target.innerText;
-        console.log(target);
+        const keywords = e.target.innerText;
 
-        recipesFound = that.searchByUstensil.search(target);
-        that.displayRecipes(recipesFound);
+        that.handleClickOnKeywords(keywords, 'ustensil')
       });
 
   }
@@ -194,9 +453,7 @@ class Filters {
         <ul id="dropdownContentIngredients" class="dropdown-content dropdown-content-ingredients">
         <input class="form-control" id="myInputIngredients" type="text" placeholder="Rechercher un ingrédient">
           <span><i class="fas fa-angle-up arrow-up-ingredients"></i></span>
-          <div class="li-ingredients">
-            ${this.resources.ingredientsAsList}
-          </div>
+          <div class="li-ingredients"></div>
         </ul>
       
         <button class="btn dropbtn-appareils">
@@ -206,9 +463,7 @@ class Filters {
         <ul id="dropdownContentAppareils" class="dropdown-content dropdown-content-appareils">
           <input class="form-control" id="myInputAppareils" type="text" placeholder="Rechercher un appareil">
           <span><i class="fas fa-angle-up arrow-up-appareils"></i></span>
-          <div class="li-appareils">
-            ${this.resources.appliancesAsList}
-          </div>
+          <div class="li-appareils"></div>
         </ul>
     
         <button class="btn dropbtn-ustensiles">
@@ -218,19 +473,19 @@ class Filters {
         <ul id="dropdownContentUstensiles" class="dropdown-content dropdown-content-ustensils">
           <input class="form-control" id="myInputUstensiles" type="text" placeholder="Rechercher un ustensile">
           <span><i class="fas fa-angle-up arrow-up-ustensiles"></i></span>
-          <div class="li-ustensiles">
-            ${this.resources.ustensilsAsList}
-          </div>
+          <div class="li-ustensiles"></div>
         </ul>
       </div>
     `;
 
     this.$wrapper.innerHTML = filterBody;
+    this.displayMenusLists();
     this.onClickBtn();
     this.onClickArrowUp();
-    this.onKeyUpFilter();
-    this.onClickMenu();
+    this.onKeyUpAdvancedFilter();
+    this.onClickMenuItem();
     this.$filtersWrapper.appendChild(this.$wrapper);
+    
   }
 
 }

@@ -281,11 +281,12 @@ h1 {
 
 .li-ingredients, .li-appareils, .li-ustensiles {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
   margin-top: 0.7rem;
   cursor: pointer;
 }
+
 
 .show {
   display: block;
@@ -298,6 +299,36 @@ h1 {
   cursor: pointer;
 }
 
+.errorMessage {
+  font-family: Lato, sans-serif;
+  font-size: 2rem;
+  position: absolute;
+}
+
+.tags-wrapper {
+  margin-bottom: 2.5rem;
+}
+
+.tags-wrapper ul {
+  display: flex;
+  column-gap: 1rem;
+  height: 3.7rem;
+  list-style-type: none;
+  font-family: Lato, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+
+.tags-wrapper ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  column-gap: 1.3rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
 
 // ******* Fin Style des boutons de filtre ********
 
