@@ -31,5 +31,61 @@
     font-size: 1rem;
     line-height: 1.2rem;
   }
+
+
+  .btn {
+    font-size: 0.7rem;
+    height: 3.5rem;
+    width: 6rem;
+  }
+
+  .dropdown-wrapper {
+    column-gap: 0.7rem;
+  }
+
+  #myInputIngredients, #myInputAppareils, #myInputUstensiles {
+    font-size: 0.8rem;
+    padding: 1rem 1rem 1rem 0.5rem;
+  }
+
+  .dropdown-content {  /* <ul> */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+    line-height: 2rem;
+  }
+
+  .dropdown-content-ingredients {  /* <ul> */
+    height : 39.7rem;
+    width: 14rem;
+  }
+  
+  .dropdown-content-appareils {  /* <ul> */
+    height : 39.7rem;
+    width: 14rem;
+  }
+  
+  .dropdown-content-ustensils {  /* <ul> */
+    height : 39.7rem;
+    width: 13rem;
+  }
+
+  .li-ingredients, .li-appareils, .li-ustensiles {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin-top: 0.7rem;
+    cursor: pointer;
+  }
+
+  .tags-wrapper ul {
+    column-gap: 1rem;
+    font-size: 1rem;
+  }
+
+  .tags-wrapper ul li {
+    column-gap: 1.3rem;
+    padding: 0.2rem 0.4rem;
+  }
   
 }

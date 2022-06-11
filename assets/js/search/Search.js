@@ -46,7 +46,6 @@ class SearchByNameIngredientsDescription extends Search {
     
     return result;
   }
-
 }
 
 class SearchByIngredient extends Search {
@@ -66,7 +65,6 @@ class SearchByIngredient extends Search {
     
     return resultsByIngredient;
   }
-
 }
 
 class SearchByAppliance extends Search {
@@ -86,7 +84,6 @@ class SearchByAppliance extends Search {
     
     return resultsByAppliance;
   }
-
 }
 
 
@@ -111,7 +108,6 @@ class SearchByUstensil extends Search {
     
     return resultsByUstensil;
   }
-
 }
 
 

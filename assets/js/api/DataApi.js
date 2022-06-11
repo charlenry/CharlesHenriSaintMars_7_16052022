@@ -27,7 +27,6 @@ class DataApi {
         console.log(`HTTP Error: ${error.message}`);
       });
   }
-  
 }
 
 //export default DataApi;

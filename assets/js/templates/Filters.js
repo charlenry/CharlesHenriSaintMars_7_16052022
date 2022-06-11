@@ -231,10 +231,9 @@ class Filters {
     this.removeSelectedUstensilFomList();
      
     /* console */
-    console.log('g_previousSearchResult:', g_previousSearchResult);
-    console.log('g_query:', g_query);
-    console.log('g_tags:', g_tags);
-
+    // console.log('g_previousSearchResult:', g_previousSearchResult);
+    // console.log('g_query:', g_query);
+    // console.log('g_tags:', g_tags);
   }
 
 
@@ -413,7 +412,6 @@ class Filters {
     // console.log('recipesFound:', recipesFound);
     // console.log('g_query:', g_query);
     // console.log('g_tags:', g_tags);
-
   }
 
 
@@ -491,7 +489,5 @@ class Filters {
     this.onKeyUpAdvancedFilter();
     this.onClickMenuItem();
     this.$filtersWrapper.appendChild(this.$wrapper);
-    
   }
-
 }

@@ -23,7 +23,7 @@ class RecourcesDataModel {
 
 
   /* mettre en majuscule la première lettre d'une chaine */
-  upperCaseFirstChar(str){
+  upperCaseFirstChar(str) {
     return (str+'').charAt(0).toUpperCase()+str.substr(1);
   }
 
@@ -90,7 +90,6 @@ class RecourcesDataModel {
     return result;
   }
 
-
   /* Liste des ustensiles */
   get ustensilsAsList() {
     let ustensils = [];
@@ -107,7 +106,7 @@ class RecourcesDataModel {
     /* Mettre en minuscule les noms d'ingrédients */
     ustensils.forEach(element => {
       resultIntermed.push(element.toLowerCase());
-    })
+    });
 
      /* Eliminer les doublons */
     ustensils = [...new Set(resultIntermed)];
@@ -124,7 +123,7 @@ class RecourcesDataModel {
 
     return result;
   }
-
+  
 }
 
 //export default AllRecipesDataModel;

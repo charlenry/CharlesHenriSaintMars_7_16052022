@@ -38,7 +38,6 @@ class SearchBar {
           this.$recipesWrapper.appendChild(templateCard.createRecipeCard());
       });
     }
-
   }
 
 
@@ -83,7 +82,6 @@ class SearchBar {
     console.log('g_previousSearchResult:', g_previousSearchResult);
     console.log('g_query:', g_query);
     console.log('g_tags:', g_tags);
-
   }
 
 
@@ -114,5 +112,4 @@ class SearchBar {
     this.onSearch();
     this.$searchWrapper.appendChild(this.$wrapper);
   }
-
 }

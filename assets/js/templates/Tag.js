@@ -5,8 +5,7 @@
 **/
 
 class Tag { 
-  
-  constructor(filters) {
+  constructor() {
     this._filters = null;
     this.ingredientColor = '#3282F7';
     this.applianceColor = '#68D9A4';
@@ -46,7 +45,6 @@ class Tag {
     this.$wrapper.appendChild($li);  // on met le li dans le ul
     this.$tagsWrapper.appendChild(this.$wrapper);
     this.addEventListenerTag();
-    
   }
 
 
@@ -74,6 +72,4 @@ class Tag {
       }
     }
   }
-
-
 }

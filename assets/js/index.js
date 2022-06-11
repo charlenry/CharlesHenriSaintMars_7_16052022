@@ -9,7 +9,7 @@
 
 /* Variables globales */
 let g_previousSearchResult = [];
-let g_query ="";
+let g_query = "";
 let g_tags = [];
 
 class Main {
@@ -33,7 +33,6 @@ class Main {
     searchByNameIngredientsDescription.render();
 
    
-
     /* Pour chaque recette */
     recipesDataModel.forEach(recipe => {
       /* Créer un objet template */
