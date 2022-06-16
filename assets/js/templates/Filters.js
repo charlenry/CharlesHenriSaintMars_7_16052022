@@ -134,6 +134,7 @@ class Filters {
 
     $liGrid = this.$wrapper.querySelector(liGridCl);
     liArray = $liGrid.getElementsByTagName("li");
+    // console.time('Timing recherche avancée');
     for (let li of liArray) {
       liValue = li.textContent;
       if (liValue.toLowerCase().indexOf(inputValue) > -1) {
@@ -142,6 +143,7 @@ class Filters {
         li.style.display = "none";  /* Ne plus afficher l'élément */
       }
     }
+    // console.timeEnd('Timing recherche avancée');
   }
 
 
@@ -171,58 +173,53 @@ class Filters {
   }
 
 
+  retrieveRecipesFromRemainingTagList(recipesFound) {
+    let liArray = null;
+
+    /* récupère la liste des tags restants après la suppression du précédent tag */
+    liArray = this.$tagsWrapper.getElementsByTagName("li");
+    for (let li of liArray) {
+      if (li.className === 'ingredient') {
+        this.searchByIngredient.recipes = recipesFound;
+        recipesFound = this.searchByIngredient.search(li.textContent);
+      } else if (li.className === 'appliance') {
+        this.searchByAppliance.recipes = recipesFound;
+        recipesFound = this.searchByAppliance.search(li.textContent);
+      } else if (li.className === 'ustensil') {
+        this.searchByUstensil.recipes = recipesFound;
+        recipesFound = this.searchByUstensil.search(li.textContent);
+      }
+    }
+    return recipesFound;
+  }
+
+
+  handleSearchResult(recipesFound) {
+    this.displayRecipes(recipesFound);
+    this.resourcesFromKeywords.recipes = recipesFound;
+    this.displayMenusLists(this.resourcesFromKeywords);
+  }
+
 
   handleClickOnTagCloseBtn() {
     let recipesFound = null;
-    let liArray = null;
     
     if (g_query.length >= 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
       this._searchByNID.handleQueryBar(g_query);
 
     } else if (g_query.length < 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
-      this.displayRecipes(this._recipes);
-      this.resourcesFromKeywords.recipes = this._recipes;
-      this.displayMenusLists(this.resourcesFromKeywords);
+      recipesFound = this._recipes;
+      this.handleSearchResult(recipesFound);
 
     } else if (g_query.length >= 3 && g_tags.length >= 1) {  /* après  avoir supprimé le tag **/
       recipesFound = this._searchByNID.searchByNIDFromInitialData.search(g_query);
-      
-      liArray = this.$tagsWrapper.getElementsByTagName("li");
-      for (let li of liArray) {
-        if (li.className === 'ingredient') {
-          this.searchByIngredient.recipes = recipesFound;
-          recipesFound = this.searchByIngredient.search(li.textContent);
-        } else if (li.className === 'appliance') {
-          this.searchByAppliance.recipes = recipesFound;
-          recipesFound = this.searchByAppliance.search(li.textContent);
-        } else if (li.className === 'ustensil') {
-          this.searchByUstensil.recipes = recipesFound;
-          recipesFound = this.searchByUstensil.search(li.textContent);
-        }
-      }
-      this.displayRecipes(recipesFound);
-      this.resourcesFromKeywords.recipes = recipesFound;
-      this.displayMenusLists(this.resourcesFromKeywords);
+      recipesFound = this.retrieveRecipesFromRemainingTagList(recipesFound);
+      this.handleSearchResult(recipesFound);
 
     } else if (g_query.length < 3 && g_tags.length >= 1) {    /* après  avoir supprimé le tag **/
       recipesFound = this._recipes;
-
-      liArray = this.$tagsWrapper.getElementsByTagName("li");
-      for (let li of liArray) {
-        if (li.className === 'ingredient') {
-          this.searchByIngredient.recipes = recipesFound;
-          recipesFound = this.searchByIngredient.search(li.textContent);
-        } else if (li.className === 'appliance') {
-          this.searchByAppliance.recipes = recipesFound;
-          recipesFound = this.searchByAppliance.search(li.textContent);
-        } else if (li.className === 'ustensil') {
-          this.searchByUstensil.recipes = recipesFound;
-          recipesFound = this.searchByUstensil.search(li.textContent);
-        }
-      }
-      this.displayRecipes(recipesFound);
-      this.resourcesFromKeywords.recipes = recipesFound;
-      this.displayMenusLists(this.resourcesFromKeywords);
+      recipesFound = this.retrieveRecipesFromRemainingTagList(recipesFound);
+      this.handleSearchResult(recipesFound);
     }
 
     g_previousSearchResult = recipesFound;
@@ -287,35 +284,27 @@ class Filters {
       if (g_query.length >= 3 && g_tags.length == 0) {
         this.searchByIngredient.recipes = g_previousSearchResult;
         recipesFound = this.searchByIngredient.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ingredient');
 
       } else if (g_query.length < 3 && g_tags.length == 0) {
         this.searchByIngredient.recipes = this._recipes;
         recipesFound = this.searchByIngredient.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ingredient');
 
       } else if (g_query.length >= 3 && g_tags.length >= 1) {
         this.searchByIngredient.recipes = g_previousSearchResult;
       
         recipesFound = this.searchByIngredient.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ingredient');
 
       } else if (g_query.length < 3 && g_tags.length >= 1) {         
         this.searchByIngredient.recipes = g_previousSearchResult;
       
         recipesFound = this.searchByIngredient.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ingredient');
       }
     }
@@ -325,35 +314,27 @@ class Filters {
       if (g_query.length >= 3 && g_tags.length == 0) {
         this.searchByAppliance.recipes = g_previousSearchResult;
         recipesFound = this.searchByAppliance.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'appliance');
 
       } else if (g_query.length < 3 && g_tags.length == 0) {
         this.searchByAppliance.recipes = this._recipes;
         recipesFound = this.searchByAppliance.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'appliance');
         
       } else if (g_query.length >= 3 && g_tags.length >= 1) {
         this.searchByAppliance.recipes = g_previousSearchResult;
 
         recipesFound = this.searchByAppliance.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'appliance');
 
       } else if (g_query.length < 3 && g_tags.length >= 1) {         
         this.searchByAppliance.recipes = g_previousSearchResult;
       
         recipesFound = this.searchByAppliance.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'appliance');
       }
     }
@@ -364,35 +345,28 @@ class Filters {
         this.searchByUstensil.recipes = g_previousSearchResult;
 
         recipesFound = this.searchByUstensil.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ustensil');
 
       } else if (g_query.length < 3 && g_tags.length == 0) {
         this.searchByUstensil.recipes = this._recipes;
 
         recipesFound = this.searchByUstensil.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ustensil');
 
       } else if (g_query.length >= 3 && g_tags.length >= 1) {
         this.searchByUstensil.recipes = g_previousSearchResult;
       
         recipesFound = this.searchByUstensil.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ustensil');
 
       } else if (g_query.length < 3 && g_tags.length >= 1) {         
         this.searchByUstensil.recipes = g_previousSearchResult;
       
         recipesFound = this.searchByUstensil.search(keywords);
-        this.displayRecipes(recipesFound);
-        this.resourcesFromKeywords.recipes = recipesFound;
-        this.displayMenusLists(this.resourcesFromKeywords);
+        this.handleSearchResult(recipesFound);
         this._tags.addTag(keywords, 'ustensil');
       }
     }

@@ -57,9 +57,12 @@ class Tag {
     for (i = 0; i < close.length; i++) {
       close[i].onclick = function() {
         li = this.parentElement;
+        /* supprime l'élément li correspondant */
         li.remove();
 
+        /* Supprime le tag correspondant dans la liste des tags */
         g_tags =  g_tags.filter(tag => tag !== li.textContent);
+        /* si la liste des tags est vide, enlève supprime la barre des tags */
         if(g_tags.length == 0) {
           that.$wrapper.remove();  
         }

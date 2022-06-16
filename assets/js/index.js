@@ -8,9 +8,9 @@
 //import { recipes } from "../data/recipes.js";
 
 /* Variables globales */
-let g_previousSearchResult = [];
-let g_query = "";
-let g_tags = [];
+let g_previousSearchResult = []; /* conserve le résultat de la dernière recherche effectué */
+let g_query = "";  /* conserve la dernère requette de la barre de recherche principale */
+let g_tags = [];  /* conserve la liste des tags */
 
 class Main {
   constructor() {
