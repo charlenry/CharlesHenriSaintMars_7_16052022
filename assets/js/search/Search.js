@@ -34,16 +34,16 @@ class SearchByNameIngredientsDescription extends Search {
 
     /******** Sélectionner les recettes en fonction leur nom ********/
     // Implémentation à l'aide de la méthode filter des tableaux
-    resultsByName = this._recipes.filter(recipe =>
-      recipe.name.toLowerCase().includes(query.toLowerCase())
-    );
+    // resultsByName = this._recipes.filter(recipe =>
+    //   recipe.name.toLowerCase().includes(query.toLowerCase())
+    // );
 
     // Implémentation à l'aide de la boucle for of
-    // for (let recipe of this._recipes) {
-    //   if (recipe.name.toLowerCase().includes(query.toLowerCase()) === true) {
-    //     resultsByName.push(recipe);
-    //   }
-    // }
+    for (let recipe of this._recipes) {
+      if (recipe.name.toLowerCase().includes(query.toLowerCase()) === true) {
+        resultsByName.push(recipe);
+      }
+    }
 
     // Implémentation à l'aide de la boucle for
     // for (i = 0; i < this._recipes.length; i++) {
@@ -56,16 +56,16 @@ class SearchByNameIngredientsDescription extends Search {
 
     /******** Sélectionner les recettes en fonction des noms des ingrédients ********/
     // Implémentation à l'aide de la méthode filter des tableaux
-    resultsByIngredients = this._recipes.filter(recipe =>
-      recipe.ingredientsForSearch.toLowerCase().includes(query.toLowerCase())
-    );
+    // resultsByIngredients = this._recipes.filter(recipe =>
+    //   recipe.ingredientsForSearch.toLowerCase().includes(query.toLowerCase())
+    // );
 
     // Implémentation à l'aide de la boucle for of 
-    // for (let recipe of this._recipes) {
-    //   if (recipe.ingredientsForSearch.toLowerCase().includes(query.toLowerCase()) === true) {
-    //     resultsByIngredients.push(recipe);
-    //   }
-    // }
+    for (let recipe of this._recipes) {
+      if (recipe.ingredientsForSearch.toLowerCase().includes(query.toLowerCase()) === true) {
+        resultsByIngredients.push(recipe);
+      }
+    }
 
     // Implémentation à l'aide de la boucle for
     // for (i = 0; i < this._recipes.length; i++) {
@@ -78,16 +78,16 @@ class SearchByNameIngredientsDescription extends Search {
     
     /******** Sélectionner les recettes en fonction de la description ********/
     // Implémentation à l'aide de la méthode filter des tableaux
-    resultsByDescription = this._recipes.filter(recipe =>
-      recipe.description.toLowerCase().includes(query.toLowerCase())
-    );
+    // resultsByDescription = this._recipes.filter(recipe =>
+    //   recipe.description.toLowerCase().includes(query.toLowerCase())
+    // );
 
     // Implémentation à l'aide de la boucle for of
-    // for (let recipe of this._recipes) {
-    //   if (recipe.description.toLowerCase().includes(query.toLowerCase()) === true) {
-    //     resultsByDescription.push(recipe);
-    //   }
-    // }
+    for (let recipe of this._recipes) {
+      if (recipe.description.toLowerCase().includes(query.toLowerCase()) === true) {
+        resultsByDescription.push(recipe);
+      }
+    }
 
     // Implémentation à l'aide de la boucle for
     // for (i = 0; i < this._recipes.length; i++) {
