@@ -173,7 +173,7 @@ class Filters {
   }
 
 
-  retrieveRecipesFromRemainingTagList(recipesFound) {
+  retrieveRecipesFromRemainingTagsList(recipesFound) {
     let liArray = null;
 
     /* récupère la liste des tags restants après la suppression du précédent tag */
@@ -213,12 +213,12 @@ class Filters {
 
     } else if (g_query.length >= 3 && g_tags.length >= 1) {  /* après  avoir supprimé le tag **/
       recipesFound = this._searchByNID.searchByNIDFromInitialData.search(g_query);
-      recipesFound = this.retrieveRecipesFromRemainingTagList(recipesFound);
+      recipesFound = this.retrieveRecipesFromRemainingTagsList(recipesFound);
       this.handleSearchResult(recipesFound);
 
     } else if (g_query.length < 3 && g_tags.length >= 1) {    /* après  avoir supprimé le tag **/
       recipesFound = this._recipes;
-      recipesFound = this.retrieveRecipesFromRemainingTagList(recipesFound);
+      recipesFound = this.retrieveRecipesFromRemainingTagsList(recipesFound);
       this.handleSearchResult(recipesFound);
     }
 

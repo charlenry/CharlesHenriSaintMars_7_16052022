@@ -66,13 +66,13 @@ class SearchBar {
     } else if (query.length >= 3 && g_tags.length >= 1) {
       /* Recherche par nom des recettes, par ingrédients et par description depuis la liste complète */
       recipesFound = this.searchByNIDFromInitialData.search(query);
-      recipesFound = this._filters.retrieveRecipesFromRemainingTagList(recipesFound);
+      recipesFound = this._filters.retrieveRecipesFromRemainingTagsList(recipesFound);
       this.handleSearchResult(recipesFound);
 
     } else if (query.length < 3 && g_tags.length >= 1) {
       /* recipesFound reçoit la liste complète des recettes */
       recipesFound = this._recipes;
-      recipesFound = this._filters.retrieveRecipesFromRemainingTagList(recipesFound);
+      recipesFound = this._filters.retrieveRecipesFromRemainingTagsList(recipesFound);
       this.handleSearchResult(recipesFound);
     }
 
