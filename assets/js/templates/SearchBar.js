@@ -53,28 +53,20 @@ class SearchBar {
   handleQueryBar(query) {
     let recipesFound = null;
     
-    if (query.length >= 3 && g_tags.length == 0) {
+    if (query.length >= 3) {
       /* Recherche par nom des recettes, par ingrédients et par description depuis la liste complète */
       recipesFound = this.searchByNIDFromInitialData.search(query);
-      this.handleSearchResult(recipesFound);
-
-    } else if (query.length < 3 && g_tags.length == 0) {
+    } else if (query.length < 3) {
       /* recipesFound reçoit la liste complète des recettes */
       recipesFound = this._recipes;
-      this.handleSearchResult(recipesFound);
-
-    } else if (query.length >= 3 && g_tags.length >= 1) {
-      /* Recherche par nom des recettes, par ingrédients et par description depuis la liste complète */
-      recipesFound = this.searchByNIDFromInitialData.search(query);
-      recipesFound = this._filters.retrieveRecipesFromRemainingTagsList(recipesFound);
-      this.handleSearchResult(recipesFound);
-
-    } else if (query.length < 3 && g_tags.length >= 1) {
-      /* recipesFound reçoit la liste complète des recettes */
-      recipesFound = this._recipes;
-      recipesFound = this._filters.retrieveRecipesFromRemainingTagsList(recipesFound);
-      this.handleSearchResult(recipesFound);
     }
+    
+    if (g_tags.length >= 1) {
+      /* Recherche par ingrédients ou par appareil ou par ustensiles selon le cas */
+      recipesFound = this._filters.retrieveRecipesFromRemainingTagsList(recipesFound);
+    } 
+
+    this.handleSearchResult(recipesFound);
 
     /* console */
     // console.log('g_previousSearchResult:', g_previousSearchResult);

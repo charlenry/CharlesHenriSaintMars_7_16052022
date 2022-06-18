@@ -195,6 +195,7 @@ class Filters {
 
 
   handleSearchResult(recipesFound) {
+    g_previousSearchResult = recipesFound;
     this.displayRecipes(recipesFound);
     this.resourcesFromKeywords.recipes = recipesFound;
     this.displayMenusLists(this.resourcesFromKeywords);
@@ -204,25 +205,17 @@ class Filters {
   handleClickOnTagCloseBtn() {
     let recipesFound = null;
     
-    if (g_query.length >= 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
-      this._searchByNID.handleQueryBar(g_query);
-
-    } else if (g_query.length < 3 && g_tags.length == 0) {  /* après  avoir supprimé le tag **/
+    if (g_query.length >= 3) {  /* après  avoir supprimé le tag **/
+     recipesFound = this._searchByNID.searchByNIDFromInitialData.search(g_query);
+    } else if (g_query.length < 3) {  /* après  avoir supprimé le tag **/
       recipesFound = this._recipes;
-      this.handleSearchResult(recipesFound);
-
-    } else if (g_query.length >= 3 && g_tags.length >= 1) {  /* après  avoir supprimé le tag **/
-      recipesFound = this._searchByNID.searchByNIDFromInitialData.search(g_query);
+    } 
+    
+    if (g_tags.length >= 1) {  /* après  avoir supprimé le tag **/
       recipesFound = this.retrieveRecipesFromRemainingTagsList(recipesFound);
-      this.handleSearchResult(recipesFound);
+    } 
 
-    } else if (g_query.length < 3 && g_tags.length >= 1) {    /* après  avoir supprimé le tag **/
-      recipesFound = this._recipes;
-      recipesFound = this.retrieveRecipesFromRemainingTagsList(recipesFound);
-      this.handleSearchResult(recipesFound);
-    }
-
-    g_previousSearchResult = recipesFound;
+    this.handleSearchResult(recipesFound);
     this.removeSelectedIngedientFomList();
     this.removeSelectedApplianceFomList();
     this.removeSelectedUstensilFomList();
@@ -281,94 +274,53 @@ class Filters {
     let recipesFound = null;
     
     if (tagType === 'ingredient') {
-      if (g_query.length >= 3 && g_tags.length == 0) {
+      if (g_query.length >= 3) {
         this.searchByIngredient.recipes = g_previousSearchResult;
-        recipesFound = this.searchByIngredient.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ingredient');
-
-      } else if (g_query.length < 3 && g_tags.length == 0) {
+      } else if (g_query.length < 3) {
         this.searchByIngredient.recipes = this._recipes;
-        recipesFound = this.searchByIngredient.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ingredient');
+      } 
 
-      } else if (g_query.length >= 3 && g_tags.length >= 1) {
+      if (g_tags.length >= 1) {
         this.searchByIngredient.recipes = g_previousSearchResult;
-      
-        recipesFound = this.searchByIngredient.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ingredient');
-
-      } else if (g_query.length < 3 && g_tags.length >= 1) {         
-        this.searchByIngredient.recipes = g_previousSearchResult;
-      
-        recipesFound = this.searchByIngredient.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ingredient');
       }
+
+      recipesFound = this.searchByIngredient.search(keywords);
+      this.handleSearchResult(recipesFound);
+      this._tags.addTag(keywords, 'ingredient');
     }
 
 
     if (tagType === 'appliance') {
-      if (g_query.length >= 3 && g_tags.length == 0) {
+      if (g_query.length >= 3) {
         this.searchByAppliance.recipes = g_previousSearchResult;
-        recipesFound = this.searchByAppliance.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'appliance');
-
-      } else if (g_query.length < 3 && g_tags.length == 0) {
+      } else if (g_query.length < 3) {
         this.searchByAppliance.recipes = this._recipes;
-        recipesFound = this.searchByAppliance.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'appliance');
-        
-      } else if (g_query.length >= 3 && g_tags.length >= 1) {
-        this.searchByAppliance.recipes = g_previousSearchResult;
+      } 
 
-        recipesFound = this.searchByAppliance.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'appliance');
-
-      } else if (g_query.length < 3 && g_tags.length >= 1) {         
+      if (g_tags.length >= 1) {
         this.searchByAppliance.recipes = g_previousSearchResult;
-      
-        recipesFound = this.searchByAppliance.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'appliance');
       }
+
+      recipesFound = this.searchByAppliance.search(keywords);
+      this.handleSearchResult(recipesFound);
+      this._tags.addTag(keywords, 'appliance');
     }
 
 
     if (tagType === 'ustensil') {
-      if (g_query.length >= 3 && g_tags.length == 0) {
+      if (g_query.length >= 3) {
         this.searchByUstensil.recipes = g_previousSearchResult;
-
-        recipesFound = this.searchByUstensil.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ustensil');
-
-      } else if (g_query.length < 3 && g_tags.length == 0) {
+      } else if (g_query.length < 3) {
         this.searchByUstensil.recipes = this._recipes;
+      } 
 
-        recipesFound = this.searchByUstensil.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ustensil');
-
-      } else if (g_query.length >= 3 && g_tags.length >= 1) {
+      if (g_tags.length >= 1) {
         this.searchByUstensil.recipes = g_previousSearchResult;
-      
-        recipesFound = this.searchByUstensil.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ustensil');
-
-      } else if (g_query.length < 3 && g_tags.length >= 1) {         
-        this.searchByUstensil.recipes = g_previousSearchResult;
-      
-        recipesFound = this.searchByUstensil.search(keywords);
-        this.handleSearchResult(recipesFound);
-        this._tags.addTag(keywords, 'ustensil');
       }
+
+      recipesFound = this.searchByUstensil.search(keywords);
+      this.handleSearchResult(recipesFound);
+      this._tags.addTag(keywords, 'ustensil');
     }
 
     g_tags.push(keywords);
