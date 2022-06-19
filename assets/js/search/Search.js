@@ -30,8 +30,7 @@ class SearchByNameIngredientsDescription extends Search {
     let result = [];
 
     /*** Sélectionner les recettes en fonction leur nom, leurs ingrédients et leur description ***/
-
-    // Implémentation à l'aide de la boucle For Of
+    // Implémentation à l'aide de la boucle For/Of
     for (let recipe of this._recipes) {
       if (recipe.name.toLowerCase().includes(query.toLowerCase()) === true) {
         result.push(recipe);
