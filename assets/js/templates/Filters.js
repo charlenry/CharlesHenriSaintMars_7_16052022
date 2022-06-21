@@ -349,7 +349,9 @@ class Filters {
       .addEventListener('click', e => {
         const keywords = e.target.innerText;
 
-        that.handleClickOnKeywords(keywords, 'ingredient')
+        if (e.target.tagName === "LI") {
+          that.handleClickOnKeywords(keywords, 'ingredient');
+        }
       });
 
 
@@ -358,7 +360,9 @@ class Filters {
       .addEventListener('click', e => {
         const keywords = e.target.innerText;
 
-        that.handleClickOnKeywords(keywords, 'appliance')
+        if (e.target.tagName === "LI") {
+          that.handleClickOnKeywords(keywords, 'appliance');
+        }
       });
 
 
@@ -367,7 +371,9 @@ class Filters {
       .addEventListener('click', e => {
         const keywords = e.target.innerText;
 
-        that.handleClickOnKeywords(keywords, 'ustensil')
+        if (e.target.tagName === "LI") {
+          that.handleClickOnKeywords(keywords, 'ustensil');
+        }
       });
 
   }
