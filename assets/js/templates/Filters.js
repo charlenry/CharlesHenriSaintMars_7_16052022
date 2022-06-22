@@ -389,7 +389,7 @@ class Filters {
         <ul id="dropdownContentIngredients" class="dropdown-content dropdown-content-ingredients">
         <input class="form-control" id="myInputIngredients" type="text" placeholder="Rechercher un ingrédient">
           <span><i class="fas fa-angle-up arrow-up-ingredients"></i></span>
-          <div class="li-ingredients"></div>
+          <ul class="li-ingredients"></ul>
         </ul>
       
         <button class="btn dropbtn-appareils">
@@ -399,7 +399,7 @@ class Filters {
         <ul id="dropdownContentAppareils" class="dropdown-content dropdown-content-appareils">
           <input class="form-control" id="myInputAppareils" type="text" placeholder="Rechercher un appareil">
           <span><i class="fas fa-angle-up arrow-up-appareils"></i></span>
-          <div class="li-appareils"></div>
+          <ul class="li-appareils"></ul>
         </ul>
     
         <button class="btn dropbtn-ustensiles">
@@ -409,7 +409,7 @@ class Filters {
         <ul id="dropdownContentUstensiles" class="dropdown-content dropdown-content-ustensils">
           <input class="form-control" id="myInputUstensiles" type="text" placeholder="Rechercher un ustensile">
           <span><i class="fas fa-angle-up arrow-up-ustensiles"></i></span>
-          <div class="li-ustensiles"></div>
+          <ul class="li-ustensiles"></ul>
         </ul>
       </div>
     `;
