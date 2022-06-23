@@ -82,6 +82,42 @@
     column-gap: 1.3rem;
     padding: 0.5rem 1rem;
   }
+
+
+  // Style de la Modale
+  .modal-content-data .recipe-photo {
+    height: 18rem;
+  }
   
+  .modal-content-data .recipe-name {
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .modal-content-data .recipe-time {
+    font-size: 1.8rem;
+  }
+  
+  .modal-content-data .recipe-appliance {
+    font-size: 1.8rem;
+  }
+  
+  .modal-content-data .recipe-servings {
+    font-size: 1.8rem;
+  }
+  
+  .modal-content-data .recipe-ustensils {   
+    font-size: 1.8rem;
+  }
+  
+  .modal-content-data .recipe-ingredients {  
+    font-size: 1.8rem;
+  }
+  
+  .modal-content-data .recipe-description {
+    font-size: 1.4rem;
+  }
+
 }
 
