@@ -6,4 +6,4 @@ Dans cette branche, le moteur de recherche principal est implémenté avec la bo
 MODE D'EMPLOI :
 Pour effectuer une recherche, veuillez saisir au moins 3 caractères dans la barre de recherche principale sans taper sur la touche Entrée. Vous pouvez par la suite affiner votre recherche via les filtres. Il est aussi possible de commencer votre recherche directement via les filtres.
 
-Utilisez la touche Entrée pour réinitialiser la recherche.
+Lorsque vous êtes dans la barre de recherche principale, vous pouvez utiliser la touche Entrée pour réinitialiser la recherche.
