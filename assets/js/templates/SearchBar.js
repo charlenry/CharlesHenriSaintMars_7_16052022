@@ -91,7 +91,7 @@ class SearchBar {
 
   render() {
     const searchForm = `
-      <form action="#" method="POST">
+      <form action="index.html" method="get">
         <div class="search-input"> 
           <input id="search-bar" type="text" placeholder="Rechercher une recette">
         </div>
