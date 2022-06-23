@@ -143,16 +143,6 @@ h1 {
 
 
 
-
-
-
-
-
-
-
-
-
-
 // ******* Style des boutons de filtre *******
 .filters-wrapper {
   position: absolute;
@@ -346,4 +336,133 @@ h1 {
 }
 
 
+
+// ****** Style de la Modale ******
+.modal-wrapper {
+  display: none;  // Hidden by default
+  position: fixed;  // Stay in place 
+  z-index: 1;  // Sit on top 
+  padding-top: 100px;  // Location of the box 
+  left: 0;
+  top: 0;
+  width: 100%;  // Full width 
+  height: 100%;  // Full height 
+  overflow: auto;  // Enable scroll if needed 
+  background-color: rgb(0,0,0);  // Fallback color 
+  background-color: rgba(0,0,0,0.4);  // Black w/ opacity 
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 0.5rem;
+}
+
+// The Modal Close Button 
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content-data {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'photo photo'
+    'name time'
+    'appliance servings'
+    'ustensils ustensils'
+    'ingredients description';
+  border-radius: 0.5rem;
+  background-color:#E7E7E7;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.modal-content-data .recipe-photo {
+  grid-area: photo;
+  height: 28rem;
+  width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-color: #C7BEBE;
+}
+
+.modal-content-data .recipe-name {
+  grid-area: name;
+  height: 4.5rem;
+  padding-top: 2rem;
+  margin-left: 1.8rem;
+  margin-bottom: 0.4rem;
+  font-size: 2.5rem;
+}
+
+.modal-content-data .recipe-time {
+  grid-area: time;
+  height: 4.5rem;
+  padding-top: 2rem;
+  margin-right: 1.8rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: right;
+  line-height: 2.16rem;
+}
+
+.modal-content-data .recipe-appliance {
+  grid-area: appliance;
+  margin-top: 1rem;
+  margin-left: 1.8rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.modal-content-data .recipe-servings {
+  grid-area: servings;
+  margin-top: 1rem;
+  margin-right: 1.8rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.modal-content-data .recipe-ustensils {
+  grid-area: ustensils;
+  margin-top: 1rem;
+  margin-left: 1.8rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.modal-content-data .recipe-ingredients {
+  grid-area: ingredients;
+  height: 25rem;
+  padding-top: 2rem;
+  margin-left: 1.8rem;
+  line-height: 2.5rem;
+  font-size: 2rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.modal-content-data .recipe-description {
+  grid-area: description;
+  height: 25rem;
+  padding-top: 2rem;
+  margin-right: 1.8rem;
+  font-family: Roboto, sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  @include multiline-ellipsis(14);
+  border-bottom-right-radius: 0.5rem;
+}
 

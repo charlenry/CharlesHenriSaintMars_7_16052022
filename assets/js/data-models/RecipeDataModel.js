@@ -14,7 +14,7 @@ class RecipeDataModel {
   constructor(recipe) {
     this._id = recipe.id;
     this._name = recipe.name;
-    this._serving = recipe.serving;
+    this._servings = recipe.servings
     this._ingredients = recipe.ingredients;
     this._ingredientsForSearch = "";
     this._time = recipe.time;
@@ -35,9 +35,9 @@ class RecipeDataModel {
   }
 
 
-  get serving() {
+  get servings() {
     /* Retourne un nombre */
-    return this._serving;
+    return this._servings;
   }
 
 
@@ -95,10 +95,25 @@ class RecipeDataModel {
     return this._appliance;
   }
 
-
   get ustensils() {
-    /* retourne un tableau des ustensiles */
+    /* Retourne un tableau */
     return this._ustensils;
+  }
+
+
+  get ustensilsForModal() {
+    let ustensiles = '';
+    let i;
+
+    /* Retourne une chaine */
+    for (i = 0; i < this._ustensils.length; i++) {
+      if (i <= this._ustensils.length-2) {
+        ustensiles += `${this._ustensils[i]}, `;
+      } else {
+        ustensiles += `${this._ustensils[i]}`;
+      }
+    }
+    return ustensiles;
   }
 
 }
