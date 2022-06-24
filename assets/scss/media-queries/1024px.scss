@@ -19,12 +19,28 @@
   .recipe-name {
     font-size: 1.6rem;
     font-weight: 700;
-    line-height: 1.5rem;
+    line-height: 1.8rem;
+  }
+
+  .fa-clock {
+    font-size: 1.6rem;
+  }
+
+  .recipe-time {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.8rem;
   }
 
   .recipe-ingredients {
     font-size: 1.4rem;
     line-height: 1.5rem;
+  }
+
+  .recipe-description {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.7rem;
   }
   
   
@@ -94,9 +110,23 @@
     line-height: 2rem;
     margin-bottom: 1rem;
   }
+
+  .modal-content-data .fa-clock {
+    font-size: 2rem;
+  }
   
   .modal-content-data .recipe-time {
+    font-size: 2rem;
+  }
+
+  .modal-content-data .recipe-ingredients {  
     font-size: 1.8rem;
+    line-height: 2rem;
+  }
+  
+  .modal-content-data .recipe-description {
+    font-size: 1.45rem;
+    line-height: 1.6rem;
   }
   
   .modal-content-data .recipe-appliance {
@@ -111,13 +141,7 @@
     font-size: 1.8rem;
   }
   
-  .modal-content-data .recipe-ingredients {  
-    font-size: 1.8rem;
-  }
   
-  .modal-content-data .recipe-description {
-    font-size: 1.4rem;
-  }
 
 }
 

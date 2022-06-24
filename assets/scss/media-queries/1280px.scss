@@ -8,7 +8,7 @@
   }
 
   .recipes-wrapper {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     row-gap: 3.2rem;
   }
   
@@ -20,12 +20,29 @@
   .recipe-name {
     font-size: 1.7rem;
     font-weight: 700;
-    line-height: 1.6rem;
+    line-height: 2.16rem;
+  }
+
+  .fa-clock {
+    font-size: 1.7rem;
+  }
+
+  .recipe-time {
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 2.16rem;
   }
 
   .recipe-ingredients {
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.44rem;
+  }
+
+  .recipe-description {
     font-size: 1.4rem;
-    line-height: 1.6rem;
+    font-weight: 400;
+    line-height: 1.7rem;
   }
 
   
@@ -86,12 +103,32 @@
 
 
    // Style de la Modale
-  .modal-content-data .recipe-photo {
-    height: 22rem;
+   .modal-content-data .recipe-photo {
+    height: 18rem;
+  }
+  
+  .modal-content-data .recipe-name {
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
   }
 
+  .modal-content-data .fa-clock {
+    font-size: 2rem;
+  }
+  
+  .modal-content-data .recipe-time {
+    font-size: 2rem;
+  }
+
+  .modal-content-data .recipe-ingredients {  
+    font-size: 1.8rem;
+    line-height: 2rem;
+  }
+  
   .modal-content-data .recipe-description {
     font-size: 1.6rem;
+    line-height: 1.85rem;
   }
   
 }
