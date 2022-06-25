@@ -99,7 +99,13 @@ h1 {
   //font-weight: 400;
   line-height: 1.44rem;
   border-bottom-left-radius: 0.5rem;
+  overflow: hidden;
   //background-color: mediumpurple;
+}
+
+.recipe-ingredients li {
+  list-style-type: none;
+  @include ellipsis;
 }
 
 .recipe-description {
@@ -113,6 +119,7 @@ h1 {
   font-weight: 400;
   @include multiline-ellipsis(6);
   border-bottom-right-radius: 0.5rem;
+  overflow: hidden;
   //background-color: cyan;
 }
 
@@ -433,6 +440,7 @@ h1 {
   line-height: 2.5rem;
   font-size: 2rem;
   border-bottom-left-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .modal-content-data .recipe-description {
@@ -446,6 +454,7 @@ h1 {
   line-height: 2.3rem;
   @include multiline-ellipsis(14);
   border-bottom-right-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .modal-content-data .recipe-appliance {

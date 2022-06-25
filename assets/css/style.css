@@ -96,6 +96,14 @@ h1 {
   margin-left: 1.8rem;
   line-height: 1.44rem;
   border-bottom-left-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.recipe-ingredients li {
+  list-style-type: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .recipe-description {
@@ -112,6 +120,7 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   border-bottom-right-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .fa-clock {
@@ -410,6 +419,7 @@ h1 {
   line-height: 2.5rem;
   font-size: 2rem;
   border-bottom-left-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .modal-content-data .recipe-description {
@@ -427,6 +437,7 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   border-bottom-right-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .modal-content-data .recipe-appliance {
@@ -1064,8 +1075,8 @@ h1 {
 /* Largeur d'écran >= 768px */
 @media screen and (min-width: 768px) {
   body {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 
   .recipes-wrapper {
@@ -1169,8 +1180,8 @@ h1 {
 /* Largeur d'écran >= 1024px */
 @media screen and (min-width: 1024px) {
   body {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 
   .recipes-wrapper {
@@ -1312,13 +1323,14 @@ h1 {
 /* Largeur d'écran >= 1280px */
 @media screen and (min-width: 1280px) {
   body {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 
   .recipes-wrapper {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 3.2rem;
+    column-gap: 5rem;
   }
 
   .recipes-wrapper article {
@@ -1328,7 +1340,7 @@ h1 {
 
   .recipe-name {
     font-size: 1.7rem;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 2.16rem;
   }
 
@@ -1349,9 +1361,10 @@ h1 {
   }
 
   .recipe-description {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 400;
-    line-height: 1.7rem;
+    line-height: 1.2rem;
+    height: 9rem;
   }
 
   .btn {
@@ -1484,6 +1497,7 @@ h1 {
     font-size: 1.4rem;
     font-weight: 400;
     line-height: 1.7rem;
+    height: 12.1rem;
   }
 
   .btn {
@@ -1556,7 +1570,6 @@ h1 {
   .recipe-ingredients {
     font-size: 1.4rem;
     line-height: 1.43rem;
-    overflow: hidden;
   }
 
   .recipe-description {

@@ -64,9 +64,9 @@ class RecipeDataModel {
       }
 
       /* Liste des ingrédients sous forme de chaine non balisée destinée à la recherche */
-      this._ingredientsForSearch += `${ingrediente} ${quantity}&nbsp;${unit}, `;
+      this._ingredientsForSearch += `${ingrediente} ${quantity} ${unit}, `;
       /* Liste des ingrédients sous forme de chaine balisée */
-      ingredientsForRender += `<b>${ingrediente}</b> ${quantity}&nbsp;${unit} <br>`;
+      ingredientsForRender += `<li><b>${ingrediente}</b> ${quantity}&nbsp;${unit}</li>`;
     }
 
     /* Retourne la liste des ingrédients sous forme de chaine balisée pour affichage */
