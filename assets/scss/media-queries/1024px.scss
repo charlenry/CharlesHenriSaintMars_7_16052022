@@ -3,8 +3,8 @@
 /* Largeur d'écran >= 1024px */
 @media screen and (min-width : $ipad-pro) {  // 1024px
   body {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 5rem;
+    padding-right:5rem;
   }
   .recipes-wrapper {
     grid-template-columns: repeat(2, 1fr);
