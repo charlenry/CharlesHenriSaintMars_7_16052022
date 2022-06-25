@@ -14,18 +14,22 @@ class Modal {
 
   onCloseButton() {
     const that = this;
+    const properties = Object.getOwnPropertyNames(this);
 
     this.$wrapper
       .querySelector('.close')
       .addEventListener('click', function() {
         that.$modalWrapper.style.display = "none";
         that.$wrapper.remove();
+        /* vider l'objet en cours afin libérer de la mémoire */
+        for (let i = 0; i < properties.length; i++) {
+          delete that[properties[i]];
+        }
       });
   }
 
 
   displayModal(recipe) {
-    let minWindow = window.matchMedia("(min-width: 1024px)")
     let recipeItem;
     
     recipeItem = `
@@ -39,24 +43,24 @@ class Modal {
           <div class="recipe-appliance"><b>Appareil: </b>${recipe.appliance}</div>
           <div class="recipe-servings"><b>Nombre de personnes: </b>${recipe.servings}</div>
           <div class="recipe-ustensils"><b>Ustensiles: </b>${recipe.ustensilsForModal}</div>
-          <div class="recipe-ingredients">${recipe.ingredientsForOneRecipe}</div>
+          <div class="recipe-ingredients"><ul>${recipe.ingredientsForOneRecipe}</ul></div>
           <div class="recipe-description">${recipe.description}</div>
         </div>
       </div>
     `;
 
-    if (minWindow.matches) {
       this.$wrapper.innerHTML = recipeItem;
       this.$modalWrapper.appendChild(this.$wrapper);
       this.$modalWrapper.style.display = "block";
-    }
-    
   }
 
 
   render(recipe) {
-    this.displayModal(recipe);
-    this.onCloseButton();
+    let minWindow = window.matchMedia("(min-width: 768px)");
+    if (minWindow.matches) {
+      this.displayModal(recipe);
+      this.onCloseButton();
+    }
   }
   
 }
