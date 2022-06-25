@@ -862,8 +862,8 @@ h1 {
 /* Largeur d'écran >= 411px */
 @media screen and (min-width: 411px) {
   body {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .recipe-name {
@@ -946,8 +946,8 @@ h1 {
 /* Largeur d'écran >= 414px */
 @media screen and (min-width: 414px) {
   body {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .recipe-name {
@@ -981,8 +981,8 @@ h1 {
 /* Largeur d'écran >= 540px */
 @media screen and (min-width: 540px) {
   body {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .recipes-wrapper {
@@ -1364,7 +1364,7 @@ h1 {
     font-size: 1.2rem;
     font-weight: 400;
     line-height: 1.2rem;
-    height: 9rem;
+    height: 9.3rem;
   }
 
   .btn {
