@@ -13,7 +13,7 @@ class SearchBar {
   constructor(recipes, filters) {
     this._recipes = recipes;
     this._filters = filters;
-    this._filters.searchByNID = this;  /* Permet à l'objet filters d'accéder aux methodes de l'objet courant */
+    this._filters.searchByNID = this;  /* Permet à l'objet filters d'accéder aux méthodes de l'objet courant */
     
     this.searchByNIDFromInitialData = new SearchByNameIngredientsDescription(this._recipes);
     this.searchByNIDFromKeywords = new SearchByNameIngredientsDescription(this._recipes);

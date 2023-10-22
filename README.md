@@ -3,7 +3,7 @@ Ce projet consiste à réaliser un site Web pour l'entreprise "Les Petits Plats"
 
 Remarque : J'ai réalisé une fiche d'investigation pour le champ de recherche principal pour déterminer la solution à retenir pour obtenir un moteur de recherche le plus rapide que possible. J'ai dû choisir entre soit la méthode filter de l'objet Array soit la boucle For/Of soit la boucle For. J'ai élaboré un algorigramme pour chacune de ces possibilités. Après l'étude réalisée à l'aide de JSBench.me, j'ai retenu la méthode filter. J'ai créé une branche git pour chaque cas.
 
-Dans cette branche, le moteur de recherche principal est implémenté avec la méthode filter() des tableaux.
+**Dans cette branche, le moteur de recherche principal est implémenté avec la boucle For/Of.**
 
 MODE D'EMPLOI :
 Pour effectuer une recherche, veuillez saisir au moins 3 caractères dans la barre de recherche principale sans taper sur la touche Entrée. Vous pouvez par la suite affiner votre recherche via les filtres. Il est aussi possible de commencer votre recherche directement via les filtres.
