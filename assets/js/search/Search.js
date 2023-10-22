@@ -31,7 +31,7 @@ class SearchByNameIngredientsDescription extends Search {
     let resultsByIngredients = [];
     let resultsByDescription = [];
 
-    /******** Sélectionner les recettes en fonction leur nom ********/
+    /******** Sélectionner les recettes en fonction de leur nom ********/
     // Implémentation à l'aide de la méthode filter des tableaux
     resultsByName = this._recipes.filter(recipe =>
       recipe.name.toLowerCase().includes(query.toLowerCase())
